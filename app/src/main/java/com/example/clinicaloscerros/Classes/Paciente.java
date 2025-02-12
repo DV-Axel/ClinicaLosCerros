@@ -1,9 +1,15 @@
 package com.example.clinicaloscerros.Classes;
 
 
+import android.content.Context;
+import android.widget.Toast;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 @Entity(tableName = "pacientes")
 public class Paciente {
@@ -98,9 +104,35 @@ public class Paciente {
     }
 
 
-    public static void validar(){
-        System.out.println("ok");
+    public void validar(Context context, Paciente paciente){
+
+        //Valida los campos vacios
+        if(paciente.nombre.isEmpty() || paciente.apellido.isEmpty() || paciente.dni.isEmpty()
+                || paciente.fechaIngreso.isEmpty() || paciente.sintomas.isEmpty()){
+            Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //Validacion de fecha
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setLenient(false);
+
+        try{
+            //Solo pruebo que se pueda convertir
+            //Por comodidad y simplicidad trabajo la fecha como String
+            sdf.parse(paciente.fechaIngreso);
+
+        } catch(ParseException e){
+            Toast.makeText(context, "Error en la fecha", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
+
+
+
+
     }
-
-
 }

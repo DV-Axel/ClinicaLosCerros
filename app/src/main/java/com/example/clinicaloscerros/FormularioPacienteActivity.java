@@ -59,8 +59,7 @@ public class FormularioPacienteActivity extends AppCompatActivity {
             String sintomas = etSintomas.getText().toString();
 
             Paciente paciente = new Paciente(nombre, apellido, dni, fechaIngreso, sintomas);
-
-            paciente.validar();
+            paciente.validar(this, paciente);
 
         });
 
