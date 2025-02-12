@@ -13,6 +13,24 @@
         android:theme="@style/Theme.ClinicaLosCerros"
         tools:targetApi="31">
         <activity
+            android:name=".ListadoPacientesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FormularioRegistroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FormularioPacienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListadoPacientes"
+            android:exported="false" />
+        <activity
+            android:name=".FormularioRegistro"
+            android:exported="false" />
+        <activity
+            android:name=".FormularioPaciente"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -8,11 +8,34 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "pacientes")
 public class Paciente {
 
-    public Paciente(String nombre, int edad) {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @ColumnInfo(name = "nombre")
+    private String nombre;
+
+    @ColumnInfo(name = "apellido")
+    private String apellido;
+
+    @ColumnInfo(name = "dni")
+    private String dni;
+
+    @ColumnInfo(name = "fecha_ingreso")
+    private String fechaIngreso;
+
+    @ColumnInfo(name = "sintomas")
+    private String sintomas;
+
+
+    public Paciente(String nombre, String apellido, String dni, String fechaIngreso, String sintomas) {
         this.id = id;
         this.nombre = nombre;
-        this.edad = edad;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.fechaIngreso = fechaIngreso;
+        this.sintomas = sintomas;
     }
+
 
     public int getId() {
         return id;
@@ -30,22 +53,54 @@ public class Paciente {
         this.nombre = nombre;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    public String getDni() {
+        return dni;
+    }
 
-    @ColumnInfo(name = "nombre")
-    private String nombre;
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 
-    @ColumnInfo(name = "edad")
-    private int edad;
+    public String getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public void setFechaIngreso(String fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
+    public String getSintomas() {
+        return sintomas;
+    }
+
+    public void setSintomas(String sintomas) {
+        this.sintomas = sintomas;
+    }
+
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", dni=" + dni +
+                ", fechaIngreso='" + fechaIngreso + '\'' +
+                ", sintomas='" + sintomas + '\'' +
+                '}';
+    }
+
+
+    public static void validar(){
+        System.out.println("ok");
+    }
 
 
 }
