@@ -99,7 +99,7 @@ public class Paciente {
                 ", apellido='" + apellido + '\'' +
                 ", dni=" + dni +
                 ", fechaIngreso='" + fechaIngreso + '\'' +
-                ", sintomas='" + sintomas + '\'' +
+                ", sintomasSS='" + sintomas + '\'' +
                 '}';
     }
 
@@ -113,7 +113,20 @@ public class Paciente {
             return;
         }
 
+        //Validacion de nombre y apellido
+        if(!paciente.nombre.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$") || !paciente.apellido.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")){
+            Toast.makeText(context,"Verifique su nombre y apellido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //Validacion de dni
+        if(!paciente.dni.matches("^\\d{8}$")){
+            Toast.makeText(context, "El DNI tiene un formato incorrecto.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //Validacion de fecha
+        //Usa try catch por que parse devuelve un booleano
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setLenient(false);
 
@@ -124,9 +137,10 @@ public class Paciente {
 
         } catch(ParseException e){
             Toast.makeText(context, "Error en la fecha", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-
+        System.out.println(paciente);
 
 
 
