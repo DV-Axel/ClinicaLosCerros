@@ -142,11 +142,12 @@ public class Paciente {
 
         System.out.println(paciente);
 
+        paciente.guardarPaciente();
+    }
 
 
 
-
-
+    public void guardarPaciente(){
 
     }
 }

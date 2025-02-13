@@ -1,23 +1,19 @@
 package com.example.clinicaloscerros;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.clinicaloscerros.Classes.Paciente;
 import com.example.clinicaloscerros.Classes.PacienteDatabase;
 
-import org.w3c.dom.Text;
-
+import java.util.Calendar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -50,6 +46,9 @@ public class FormularioPacienteActivity extends AppCompatActivity {
         mainHandler = new Handler(Looper.getMainLooper());
 
 
+        etFechaIngreso.setOnClickListener(view -> mostrarDatePicker(etFechaIngreso));
+
+
 
         btnGuardar.setOnClickListener(view -> {
             String nombre = etNombre.getText().toString();
@@ -62,6 +61,23 @@ public class FormularioPacienteActivity extends AppCompatActivity {
             paciente.validar(this, paciente);
 
         });
-
     }
+
+    //Esta es una funcion para abrir un calendario y elegir la fecha, te formatea automaticamente la fecha
+    private void mostrarDatePicker(EditText etFechaIngreso) {
+        final Calendar calendario = Calendar.getInstance();
+        int anio = calendario.get(Calendar.YEAR);
+        int mes = calendario.get(Calendar.MONTH);
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, year, month, dayOfMonth) -> {
+                    // Sumar 1 al mes porque empieza desde 0
+                    String fechaSeleccionada = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year);
+                    etFechaIngreso.setText(fechaSeleccionada);
+                }, anio, mes, dia);
+
+        datePickerDialog.show();
+    }
+
 }

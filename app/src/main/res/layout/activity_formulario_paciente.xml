@@ -70,7 +70,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="Fecha de ingreso (dd/mm/aaaa)"
+            android:focusable="false"
+            android:clickable="true"
+            android:hint="Seleccionar Fecha"
             android:inputType="date"
             android:padding="10dp" />
 
