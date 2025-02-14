@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Paciente.class}, version = 1)
+@Database(entities = {Paciente.class}, version = 2)
 public abstract class PacienteDatabase extends RoomDatabase {
     private static PacienteDatabase instance;
 
@@ -15,7 +15,7 @@ public abstract class PacienteDatabase extends RoomDatabase {
 
     public static synchronized PacienteDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(), PacienteDatabase.class, "paciente_database").build();
+            instance = Room.databaseBuilder(context.getApplicationContext(), PacienteDatabase.class, "paciente_database").fallbackToDestructiveMigration().build();
         }
         return instance;
     }

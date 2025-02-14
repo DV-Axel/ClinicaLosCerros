@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +22,6 @@ public class FormularioPacienteActivity extends AppCompatActivity {
 
     private PacienteDatabase db;
     private ExecutorService executor;
-    private Handler mainHandler;
 
 
     @Override
@@ -58,7 +58,14 @@ public class FormularioPacienteActivity extends AppCompatActivity {
             String sintomas = etSintomas.getText().toString();
 
             Paciente paciente = new Paciente(nombre, apellido, dni, fechaIngreso, sintomas);
-            paciente.validar(this, paciente);
+
+            if(paciente.validar(this)){
+                executor.execute(() -> {
+                    db.pacienteDao().insert(paciente);
+                    Toast.makeText(this, "Paciente registrado con exito", Toast.LENGTH_SHORT).show();
+
+                });
+            }
 
         });
     }

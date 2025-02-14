@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:hint="DNI"
-            android:inputType="number"
+            android:inputType="textPersonName"
             android:padding="10dp" />
 
         <!-- Fecha de ingreso -->

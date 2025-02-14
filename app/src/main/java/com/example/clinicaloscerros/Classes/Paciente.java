@@ -11,8 +11,12 @@ import androidx.room.PrimaryKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @Entity(tableName = "pacientes")
 public class Paciente {
+
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -34,7 +38,6 @@ public class Paciente {
 
 
     public Paciente(String nombre, String apellido, String dni, String fechaIngreso, String sintomas) {
-        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -104,25 +107,25 @@ public class Paciente {
     }
 
 
-    public void validar(Context context, Paciente paciente){
+    public boolean validar(Context context){
 
         //Valida los campos vacios
-        if(paciente.nombre.isEmpty() || paciente.apellido.isEmpty() || paciente.dni.isEmpty()
-                || paciente.fechaIngreso.isEmpty() || paciente.sintomas.isEmpty()){
+        if(this.nombre.isEmpty() || this.apellido.isEmpty() || this.dni.isEmpty()
+                || this.fechaIngreso.isEmpty() || this.sintomas.isEmpty()){
             Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
 
         //Validacion de nombre y apellido
-        if(!paciente.nombre.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$") || !paciente.apellido.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")){
+        if(!this.nombre.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$") || !this.apellido.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")){
             Toast.makeText(context,"Verifique su nombre y apellido", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
 
         //Validacion de dni
-        if(!paciente.dni.matches("^\\d{8}$")){
+        if(!this.dni.matches("^\\d{8}$")){
             Toast.makeText(context, "El DNI tiene un formato incorrecto.", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
 
         //Validacion de fecha
@@ -133,21 +136,30 @@ public class Paciente {
         try{
             //Solo pruebo que se pueda convertir
             //Por comodidad y simplicidad trabajo la fecha como String
-            sdf.parse(paciente.fechaIngreso);
+            sdf.parse(this.fechaIngreso);
 
         } catch(ParseException e){
             Toast.makeText(context, "Error en la fecha", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
 
-        System.out.println(paciente);
+        System.out.println(this.toString());
 
-        paciente.guardarPaciente();
+        return true;
     }
 
 
 
-    public void guardarPaciente(){
+    public void guardarPaciente(PacienteDatabase db, ExecutorService executor){
+
+        executor.execute(() -> {
+            System.out.println("Guardado entra");
+            db.pacienteDao().insert(this);
+            System.out.println("Guardado correctamente");
+            System.out.println(db.pacienteDao().getAllPacientes());
+
+        });
+
 
     }
 }
