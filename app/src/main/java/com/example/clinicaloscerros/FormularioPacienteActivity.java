@@ -43,7 +43,7 @@ public class FormularioPacienteActivity extends AppCompatActivity {
 
         db = PacienteDatabase.getInstance(this);
         executor = Executors.newSingleThreadExecutor();
-        mainHandler = new Handler(Looper.getMainLooper());
+
 
 
         etFechaIngreso.setOnClickListener(view -> mostrarDatePicker(etFechaIngreso));
