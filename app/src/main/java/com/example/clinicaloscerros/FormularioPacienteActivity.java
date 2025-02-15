@@ -62,7 +62,12 @@ public class FormularioPacienteActivity extends AppCompatActivity {
             if(paciente.validar(this)){
                 executor.execute(() -> {
                     db.pacienteDao().insert(paciente);
-                    Toast.makeText(this, "Paciente registrado con exito", Toast.LENGTH_SHORT).show();
+                    System.out.println("Guardado correstamente");
+
+                    // Mostrar el Toast en el hilo principal
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Paciente guardado correctamente", Toast.LENGTH_SHORT).show();
+                    });
 
                 });
             }
