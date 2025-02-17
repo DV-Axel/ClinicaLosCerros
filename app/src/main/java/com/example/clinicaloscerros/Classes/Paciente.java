@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -146,20 +147,5 @@ public class Paciente {
         System.out.println(this.toString());
 
         return true;
-    }
-
-
-
-    public void guardarPaciente(PacienteDatabase db, ExecutorService executor){
-
-        executor.execute(() -> {
-            System.out.println("Guardado entra");
-            db.pacienteDao().insert(this);
-            System.out.println("Guardado correctamente");
-            System.out.println(db.pacienteDao().getAllPacientes());
-
-        });
-
-
     }
 }

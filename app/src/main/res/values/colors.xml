@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="celeste">#03A9F4</color> <!-- Azul celeste -->
+    <color name="azul_oscuro">#434bc9</color>
+    <color name="azul_claro">#5660ff</color>
+    <color name="violeta">#4d5299</color>
 </resources>
