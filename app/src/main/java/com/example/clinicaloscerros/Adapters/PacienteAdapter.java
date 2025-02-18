@@ -1,6 +1,7 @@
 package com.example.clinicaloscerros.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clinicaloscerros.Classes.Paciente;
 import com.example.clinicaloscerros.Classes.PacienteDatabase;
+import com.example.clinicaloscerros.FormularioPacienteActivity;
+import com.example.clinicaloscerros.FormularioRegistroActivity;
 import com.example.clinicaloscerros.ListadoPacientesActivity;
 import com.example.clinicaloscerros.R;
 
@@ -44,8 +47,11 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
     public void onBindViewHolder(PacienteViewHolder holder, int position) {
         Paciente paciente = pacientes.get(position);
 
+        // Asignar datos a las vistas
         holder.tvNombre.setText(paciente.getNombre() + " " + paciente.getApellido());
         holder.tvSintomas.setText(paciente.getSintomas());
+        holder.tvDni.setText("DNI: " + paciente.getDni()); // Mostrar DNI
+        holder.tvFechaIngreso.setText("Fecha Ingreso: " + paciente.getFechaIngreso()); // Mostrar Fecha de Ingreso
 
         // Configurar el botón "Dar de Alta"
         holder.btnDarAlta.setOnClickListener(v -> {
@@ -62,6 +68,15 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
 
             });
         });
+
+        // Configurar el boton "Editar"
+        holder.btnDarAlta.setOnClickListener(v -> {
+
+            Intent intent = new Intent(context, FormularioPacienteActivity.class);
+            intent.putExtra("id_paciente", paciente.getId());
+            context.startActivity(intent);
+
+        });
     }
 
 
@@ -72,7 +87,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
 
     public static class PacienteViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvNombre, tvSintomas;
+        TextView tvNombre, tvSintomas, tvDni, tvFechaIngreso;
         Button btnDarAlta; // Nuevo campo para el botón
 
         public PacienteViewHolder(View itemView) {
@@ -81,6 +96,8 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
             // Inicialización de los elementos del layout
             tvNombre = itemView.findViewById(R.id.tvNombrePaciente);
             tvSintomas = itemView.findViewById(R.id.tvSintomasPaciente);
+            tvDni = itemView.findViewById(R.id.tvDniPaciente); // Nueva vista para DNI
+            tvFechaIngreso = itemView.findViewById(R.id.tvFechaIngreso); // Nueva vista para Fecha de Ingreso
             btnDarAlta = itemView.findViewById(R.id.btnDarAlta); // Inicialización del botón
         }
     }
