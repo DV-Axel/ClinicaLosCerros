@@ -71,7 +71,6 @@ public class FormularioPacienteActivity extends AppCompatActivity {
                         Toast.makeText(this, "Paciente guardado correctamente", Toast.LENGTH_SHORT).show();
                     });
                 });
-                executor.shutdown();
             }
 
         });
@@ -92,6 +91,14 @@ public class FormularioPacienteActivity extends AppCompatActivity {
                 }, anio, mes, dia);
 
         datePickerDialog.show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (executor != null && !executor.isShutdown()) {
+            executor.shutdown();
+        }
     }
 
 }

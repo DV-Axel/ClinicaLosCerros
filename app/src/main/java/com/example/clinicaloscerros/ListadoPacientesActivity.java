@@ -49,16 +49,19 @@ public class ListadoPacientesActivity extends AppCompatActivity {
             List<Paciente> pacientes = db.pacienteDao().getAllPacientes();
 
             mainHandler.post(() -> {
-                pacienteAdapter = new PacienteAdapter(this, pacientes);
+                pacienteAdapter = new PacienteAdapter(this, pacientes, db, executor);
                 recyclerView.setAdapter(pacienteAdapter);
             });
         });
 
-        executor.shutdown();
 
+    }
 
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (executor != null && !executor.isShutdown()) {
+            executor.shutdown();
+        }
     }
 }

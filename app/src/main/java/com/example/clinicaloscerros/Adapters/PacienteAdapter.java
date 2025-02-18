@@ -13,18 +13,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clinicaloscerros.Classes.Paciente;
+import com.example.clinicaloscerros.Classes.PacienteDatabase;
+import com.example.clinicaloscerros.ListadoPacientesActivity;
 import com.example.clinicaloscerros.R;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.PacienteViewHolder> {
 
     private Context context;
     private List<Paciente> pacientes;
+    private PacienteDatabase db;
+    private ExecutorService executor;
 
-    public PacienteAdapter(Context context, List<Paciente> pacientes) {
+    public PacienteAdapter(Context context, List<Paciente> pacientes, PacienteDatabase db, ExecutorService executor) {
         this.context = context;
         this.pacientes = pacientes;
+        this.db = db;
+        this.executor = executor;
     }
 
     @Override
@@ -41,7 +48,20 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         holder.tvSintomas.setText(paciente.getSintomas());
 
         // Configurar el botón "Dar de Alta"
+        holder.btnDarAlta.setOnClickListener(v -> {
+            executor.execute(() -> {
+                db.pacienteDao().delete(paciente);
 
+                ((ListadoPacientesActivity) context).runOnUiThread(() -> {
+                    pacientes.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, pacientes.size());
+                    Toast.makeText(context, "Paciente dado de alta", Toast.LENGTH_SHORT).show();
+                });
+
+
+            });
+        });
     }
 
 
