@@ -97,8 +97,8 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
     public static class PacienteViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvNombre, tvSintomas, tvDni, tvFechaIngreso;
-        Button btnDarAlta; // Nuevo campo para el botón
-        Button btnEditar;
+        Button btnDarAlta, btnEditar; // Nuevo campo para el botón
+
 
         public PacienteViewHolder(View itemView) {
             super(itemView);
