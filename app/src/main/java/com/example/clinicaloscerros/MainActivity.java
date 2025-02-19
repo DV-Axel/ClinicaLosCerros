@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // Referenciar los botones
         Button btnAddPatient = findViewById(R.id.btnAddPatient);
         Button btnListPatients = findViewById(R.id.btnListPatients);

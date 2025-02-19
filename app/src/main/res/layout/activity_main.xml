@@ -12,6 +12,8 @@
     <!-- Primer botón: "Agregar Paciente" -->
 
 
+
+
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
@@ -27,11 +29,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/btnAddPatient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="156dp"
         android:background="@drawable/boton_generico"
         android:text="Agregar Paciente"
         android:textColor="@color/white"
@@ -52,6 +55,18 @@
         app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAddPatient" />
+
+    <Button
+        android:id="@+id/btnListHospitals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="68dp"
+        android:background="@drawable/boton_generico_verde"
+        android:text="Consultorios Cercanos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Segundo botón: "Listado Pacientes" -->
 
