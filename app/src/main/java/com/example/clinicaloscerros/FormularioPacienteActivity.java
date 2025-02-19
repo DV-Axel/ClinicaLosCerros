@@ -31,8 +31,15 @@ public class FormularioPacienteActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_formulario_paciente);
 
+
+
         EditText etNombre, etApellido, etDNI, etFechaIngreso, etSintomas;
         Button btnGuardar;
+
+
+
+
+
 
         // Referencias a los elementos del layout
         etNombre = findViewById(R.id.etNombre);
@@ -41,6 +48,11 @@ public class FormularioPacienteActivity extends AppCompatActivity {
         etFechaIngreso = findViewById(R.id.etFechaIngreso);
         etSintomas = findViewById(R.id.etSintomas);
         btnGuardar = findViewById(R.id.btnGuardar);
+
+
+
+
+
 
         db = PacienteDatabase.getInstance(this);
         executor = Executors.newSingleThreadExecutor();

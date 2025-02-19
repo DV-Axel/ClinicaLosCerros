@@ -64,16 +64,14 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
                     notifyItemRangeChanged(position, pacientes.size());
                     Toast.makeText(context, "Paciente dado de alta", Toast.LENGTH_SHORT).show();
                 });
-
-
             });
         });
 
         // Configurar el boton "Editar"
-        holder.btnDarAlta.setOnClickListener(v -> {
+        holder.btnEditar.setOnClickListener(v -> {
 
             Intent intent = new Intent(context, FormularioPacienteActivity.class);
-            intent.putExtra("id_paciente", paciente.getId());
+            intent.putExtra("paciente", paciente.getId());
             context.startActivity(intent);
 
         });
@@ -88,7 +86,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
     public static class PacienteViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvNombre, tvSintomas, tvDni, tvFechaIngreso;
-        Button btnDarAlta; // Nuevo campo para el botón
+        Button btnDarAlta, btnEditar; // Nuevo campo para el botón
 
         public PacienteViewHolder(View itemView) {
             super(itemView);
@@ -99,6 +97,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
             tvDni = itemView.findViewById(R.id.tvDniPaciente); // Nueva vista para DNI
             tvFechaIngreso = itemView.findViewById(R.id.tvFechaIngreso); // Nueva vista para Fecha de Ingreso
             btnDarAlta = itemView.findViewById(R.id.btnDarAlta); // Inicialización del botón
+            btnEditar = itemView.findViewById(R.id.btnEditar);
         }
     }
 
