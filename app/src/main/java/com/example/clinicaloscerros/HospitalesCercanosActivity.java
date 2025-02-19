@@ -51,28 +51,36 @@ public class HospitalesCercanosActivity extends AppCompatActivity {
                         "Clinica y Maternidad Suizo Argentina",
                         "Avenida Pueyrredón 1461",
                         "24 horas",
-                        Arrays.asList("Guardia", "Cardiología", "Traumatología", "Pediatría")
+                        Arrays.asList("Guardia", "Cardiología", "Traumatología", "Pediatría"),
+                        -34.522739,
+                        -58.484870
                 ));
 
                 hospitales.add(new Hospital(
                         "Sanatorio Los Arcos",
                         "Avenida Juan Bautista Justo 909",
                         "Lunes a Viernes 08:00 - 20:00",
-                        Arrays.asList("Cardiología", "Neurología", "Dermatología")
+                        Arrays.asList("Cardiología", "Neurología", "Dermatología"),
+                        -34.522739,
+                        -58.484870
                 ));
 
                 hospitales.add(new Hospital(
                         "Clinica Zabala",
                         "Avenida Cabildo 1295",
                         "24 horas",
-                        Arrays.asList("Guardia", "Cirugía", "Ginecología", "Odontología")
+                        Arrays.asList("Guardia", "Cirugía", "Ginecología", "Odontología"),
+                        -34.522739,
+                        -58.484870
                 ));
 
                 hospitales.add(new Hospital(
                         "Clinica Olivos",
                         "Avenida Maipú 1660",
                         "Lunes a Sabados 06:00 - 23:00",
-                        Arrays.asList("Pediatria", "Cardiologia", "Oftalmologia")
+                        Arrays.asList("Pediatria", "Cardiologia", "Oftalmologia"),
+                        -34.522739,
+                        -58.484870
                 ));
             }
 

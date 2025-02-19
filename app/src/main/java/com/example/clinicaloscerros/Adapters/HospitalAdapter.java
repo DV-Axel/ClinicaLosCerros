@@ -1,6 +1,7 @@
 package com.example.clinicaloscerros.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clinicaloscerros.Classes.Hospital;
+import com.example.clinicaloscerros.MapaActivity;
 import com.example.clinicaloscerros.R;
 
 import java.util.List;
@@ -40,6 +42,14 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.Hospit
         holder.tvNombreHospital.setText(hospital.getNombre());
         holder.tvDireccionHospital.setText(hospital.getDireccion());
         holder.tvHorarioAtencion.setText(hospital.getHorarioAtencion());
+
+        // Botón para abrir el mapa en OSM
+        holder.btnIrMapa.setOnClickListener(v -> {
+            Intent intent = new Intent(context, MapaActivity.class);
+            intent.putExtra("latitud", hospital.getLatitud());
+            intent.putExtra("longitud", hospital.getLongitud());
+            context.startActivity(intent);
+        });
     }
 
     @Override

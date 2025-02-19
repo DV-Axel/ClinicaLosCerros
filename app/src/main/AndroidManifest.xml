@@ -16,6 +16,9 @@
         android:theme="@style/Theme.ClinicaLosCerros"
         tools:targetApi="31">
         <activity
+            android:name=".MapaActivity"
+            android:exported="false" />
+        <activity
             android:name=".HospitalesCercanosActivity"
             android:exported="false" />
 
