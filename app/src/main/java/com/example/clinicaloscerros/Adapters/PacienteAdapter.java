@@ -70,7 +70,9 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         });
 
         // Configurar el boton "Editar"
-        holder.btnDarAlta.setOnClickListener(v -> {
+        holder.btnEditar.setOnClickListener(v -> {
+
+            System.out.println(paciente.getId());
 
             Intent intent = new Intent(context, FormularioPacienteActivity.class);
             intent.putExtra("id_paciente", paciente.getId());
@@ -89,6 +91,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
 
         TextView tvNombre, tvSintomas, tvDni, tvFechaIngreso;
         Button btnDarAlta; // Nuevo campo para el botón
+        Button btnEditar;
 
         public PacienteViewHolder(View itemView) {
             super(itemView);
@@ -99,6 +102,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
             tvDni = itemView.findViewById(R.id.tvDniPaciente); // Nueva vista para DNI
             tvFechaIngreso = itemView.findViewById(R.id.tvFechaIngreso); // Nueva vista para Fecha de Ingreso
             btnDarAlta = itemView.findViewById(R.id.btnDarAlta); // Inicialización del botón
+            btnEditar = itemView.findViewById(R.id.btnEditar);
         }
     }
 
