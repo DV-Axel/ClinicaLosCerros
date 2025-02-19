@@ -17,12 +17,12 @@ public interface PacienteDao {
     void insert(Paciente paciente);
 
     @Update
-        // Anotación para actualizar
-    void update(Paciente paciente);  // Método para actualizar un paciente
+    void update(Paciente paciente);
 
     @Delete
     void delete(Paciente paciente);
 
     @Query("SELECT * FROM pacientes WHERE id = :id LIMIT 1")
-    Paciente getPacienteById(long id);  // Obtener un paciente por su ID
+    Paciente getPacienteById(int id);
+
 }

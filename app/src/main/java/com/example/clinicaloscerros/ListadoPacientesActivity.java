@@ -48,6 +48,8 @@ public class ListadoPacientesActivity extends AppCompatActivity {
         executor.execute(() -> {
             List<Paciente> pacientes = db.pacienteDao().getAllPacientes();
 
+            System.out.println(db.pacienteDao().getAllPacientes());
+
             mainHandler.post(() -> {
                 pacienteAdapter = new PacienteAdapter(this, pacientes, db, executor);
                 recyclerView.setAdapter(pacienteAdapter);
