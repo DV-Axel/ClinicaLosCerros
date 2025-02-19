@@ -2,7 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ClinicaLosCerros" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">monospace</item> <!-- Roboto Regular -->
+        <item name="android:windowBackground">@drawable/fondo_proyecto</item>
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+
 </resources>

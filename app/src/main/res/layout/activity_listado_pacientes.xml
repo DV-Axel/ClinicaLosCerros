@@ -8,20 +8,23 @@
     tools:context=".ListadoPacientesActivity">
 
     <!-- Título de la página -->
+
+    <!-- RecyclerView para mostrar la lista -->
+
     <TextView
         android:id="@+id/tvTituloListado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:gravity="center"
         android:text="Listado de Pacientes"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- RecyclerView para mostrar la lista -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerPacientes"
         android:layout_width="0dp"

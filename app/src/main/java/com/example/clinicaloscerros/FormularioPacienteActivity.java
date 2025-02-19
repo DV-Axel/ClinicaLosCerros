@@ -143,6 +143,9 @@ public class FormularioPacienteActivity extends AppCompatActivity {
                     etFechaIngreso.setText(fechaSeleccionada);
                 }, anio, mes, dia);
 
+        // Bloquear fechas anteriores a hoy
+        datePickerDialog.getDatePicker().setMinDate(calendario.getTimeInMillis());
+
         datePickerDialog.show();
     }
 

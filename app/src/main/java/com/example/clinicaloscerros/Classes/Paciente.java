@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -132,12 +133,20 @@ public class Paciente {
         //Validacion de fecha
         //Usa try catch por que parse devuelve un booleano
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setLenient(false);
+        sdf.setLenient(false); //evita que se acepten fechas invalidas
 
-        try{
-            //Solo pruebo que se pueda convertir
-            //Por comodidad y simplicidad trabajo la fecha como String
-            sdf.parse(this.fechaIngreso);
+        try {
+            // Convertir la fecha de ingreso del paciente a un objeto Date
+            Date fechaIngresoDate = sdf.parse(this.fechaIngreso);
+
+            // Obtener la fecha actual del dispositivo sin horas (solo día, mes, año)
+            Date fechaActual = sdf.parse(sdf.format(new Date()));
+
+            // Comparar fechas
+            if (fechaIngresoDate.before(fechaActual)) {
+                Toast.makeText(context, "La fecha de ingreso no puede ser anterior a hoy", Toast.LENGTH_SHORT).show();
+                return false;
+            }
 
         } catch(ParseException e){
             Toast.makeText(context, "Error en la fecha", Toast.LENGTH_SHORT).show();

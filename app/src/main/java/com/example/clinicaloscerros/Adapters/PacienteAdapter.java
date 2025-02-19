@@ -1,5 +1,6 @@
 package com.example.clinicaloscerros.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -55,19 +56,30 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
 
         // Configurar el botón "Dar de Alta"
         holder.btnDarAlta.setOnClickListener(v -> {
-            executor.execute(() -> {
-                db.pacienteDao().delete(paciente);
+            // Mostrar el diálogo en el hilo principal
+            new AlertDialog.Builder(context)
+                    .setTitle("Confirmar alta")
+                    .setMessage("¿Estás seguro de que deseas dar de alta a " + paciente.getNombre() + " " + paciente.getApellido() + "?")
+                    .setPositiveButton("Sí", (dialog, which) -> {
+                        // Ejecutar la eliminación en un hilo en segundo plano
+                        executor.execute(() -> {
+                            db.pacienteDao().delete(paciente);
 
-                ((ListadoPacientesActivity) context).runOnUiThread(() -> {
-                    pacientes.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, pacientes.size());
-                    Toast.makeText(context, "Paciente dado de alta", Toast.LENGTH_SHORT).show();
-                });
-
-
-            });
+                            ((ListadoPacientesActivity) context).runOnUiThread(() -> {
+                                pacientes.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, pacientes.size());
+                                Toast.makeText(context, "Paciente dado de alta", Toast.LENGTH_SHORT).show();
+                            });
+                        });
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // Cerrar el diálogo sin hacer nada
+                        dialog.dismiss();
+                    })
+                    .show();
         });
+
 
         // Configurar el boton "Editar"
         holder.btnEditar.setOnClickListener(v -> {
