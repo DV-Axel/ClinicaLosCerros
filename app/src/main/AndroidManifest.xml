@@ -29,9 +29,7 @@
         <activity
             android:name=".ListadoPacientesActivity"
             android:exported="false" />
-        <activity
-            android:name=".FormularioRegistroActivity"
-            android:exported="false" />
+
         <activity
             android:name=".FormularioPacienteActivity"
             android:exported="false" />
@@ -44,8 +42,14 @@
         <activity
             android:name=".FormularioPaciente"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+
+
+        <activity
+            android:name=".FormularioRegistroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

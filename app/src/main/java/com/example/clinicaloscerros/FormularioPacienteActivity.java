@@ -66,18 +66,10 @@ public class FormularioPacienteActivity extends AppCompatActivity {
                 etFechaIngreso.setText(pacienteid.getFechaIngreso());
                 etSintomas.setText(pacienteid.getSintomas());
                 tvTitulo.setText("Modificar paciente");
-
-
-
             });
-
         }
 
-
-
         etFechaIngreso.setOnClickListener(view -> mostrarDatePicker(etFechaIngreso));
-
-
 
         btnGuardar.setOnClickListener(view -> {
             String nombre = etNombre.getText().toString();
@@ -95,7 +87,6 @@ public class FormularioPacienteActivity extends AppCompatActivity {
 
                         paciente.setId(idPaciente); // Asegurar que el paciente tenga el ID correcto
 
-
                         db.pacienteDao().update(paciente);
                         System.out.println("Modificado correstamente");
                         // Mostrar el Toast en el hilo principal
@@ -105,8 +96,6 @@ public class FormularioPacienteActivity extends AppCompatActivity {
                             this.startActivity(intent);
                             finish();
                         });
-
-
                     }else{
                         db.pacienteDao().insert(paciente);
                         System.out.println("Guardado correstamente");
@@ -120,15 +109,9 @@ public class FormularioPacienteActivity extends AppCompatActivity {
                         etDNI.setText("");
                         etFechaIngreso.setText("");
                         etSintomas.setText("");
-
-
-
                     }
-
-
                 });
             }
-
         });
     }
 
