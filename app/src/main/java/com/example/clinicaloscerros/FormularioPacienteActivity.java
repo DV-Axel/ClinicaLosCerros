@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.clinicaloscerros.Classes.Paciente;
@@ -32,6 +33,7 @@ public class FormularioPacienteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_formulario_paciente);
+
 
         int idPaciente = getIntent().getIntExtra("id_paciente", -1); //-1 seria un valor por defecto
 
@@ -101,6 +103,7 @@ public class FormularioPacienteActivity extends AppCompatActivity {
                             Toast.makeText(this, "Paciente modificado correctamente", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(this, ListadoPacientesActivity.class);
                             this.startActivity(intent);
+                            finish();
                         });
 
 
@@ -156,5 +159,6 @@ public class FormularioPacienteActivity extends AppCompatActivity {
             executor.shutdown();
         }
     }
+
 
 }

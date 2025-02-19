@@ -1,5 +1,6 @@
 package com.example.clinicaloscerros.Adapters;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -84,6 +85,10 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
             Intent intent = new Intent(context, FormularioPacienteActivity.class);
             intent.putExtra("id_paciente", paciente.getId());
             context.startActivity(intent);
+
+            // Finalizar esta actividad para que no quede en el stack
+            ((Activity) context).finish();
+
 
         });
     }

@@ -53,6 +53,7 @@ public class ListadoPacientesActivity extends AppCompatActivity {
             mainHandler.post(() -> {
                 pacienteAdapter = new PacienteAdapter(this, pacientes, db, executor);
                 recyclerView.setAdapter(pacienteAdapter);
+
             });
         });
 
