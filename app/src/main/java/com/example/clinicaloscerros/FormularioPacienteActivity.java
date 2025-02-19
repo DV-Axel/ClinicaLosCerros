@@ -22,6 +22,7 @@ public class FormularioPacienteActivity extends AppCompatActivity {
 
     private PacienteDatabase db;
     private ExecutorService executor;
+    private Handler mainHandler;
 
 
     @Override
@@ -43,6 +44,7 @@ public class FormularioPacienteActivity extends AppCompatActivity {
 
         db = PacienteDatabase.getInstance(this);
         executor = Executors.newSingleThreadExecutor();
+        mainHandler = new Handler(Looper.getMainLooper());
 
 
 
@@ -65,10 +67,9 @@ public class FormularioPacienteActivity extends AppCompatActivity {
                     System.out.println("Guardado correstamente");
 
                     // Mostrar el Toast en el hilo principal
-                    runOnUiThread(() -> {
+                    mainHandler.post(() -> {
                         Toast.makeText(this, "Paciente guardado correctamente", Toast.LENGTH_SHORT).show();
                     });
-
                 });
             }
 
@@ -90,6 +91,14 @@ public class FormularioPacienteActivity extends AppCompatActivity {
                 }, anio, mes, dia);
 
         datePickerDialog.show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (executor != null && !executor.isShutdown()) {
+            executor.shutdown();
+        }
     }
 
 }

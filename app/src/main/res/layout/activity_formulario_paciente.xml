@@ -92,7 +92,8 @@
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Guardar" />
+            android:text="Guardar"
+            android:background="@drawable/boton_generico"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
