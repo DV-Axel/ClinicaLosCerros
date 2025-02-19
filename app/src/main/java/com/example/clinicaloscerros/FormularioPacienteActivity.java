@@ -1,11 +1,13 @@
 package com.example.clinicaloscerros;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -31,10 +33,15 @@ public class FormularioPacienteActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_formulario_paciente);
 
+        int idPaciente = getIntent().getIntExtra("id_paciente", -1); //-1 seria un valor por defecto
+
+
+        TextView tvTitulo;
         EditText etNombre, etApellido, etDNI, etFechaIngreso, etSintomas;
         Button btnGuardar;
 
         // Referencias a los elementos del layout
+        tvTitulo = findViewById(R.id.tvTitulo);
         etNombre = findViewById(R.id.etNombre);
         etApellido = findViewById(R.id.etApellido);
         etDNI = findViewById(R.id.etDNI);
@@ -45,6 +52,24 @@ public class FormularioPacienteActivity extends AppCompatActivity {
         db = PacienteDatabase.getInstance(this);
         executor = Executors.newSingleThreadExecutor();
         mainHandler = new Handler(Looper.getMainLooper());
+
+        if(idPaciente != -1){
+            executor.execute(() -> {
+
+                Paciente pacienteid = db.pacienteDao().getPacienteById(idPaciente);
+
+                etNombre.setText(pacienteid.getNombre());
+                etApellido.setText(pacienteid.getApellido());
+                etDNI.setText(pacienteid.getDni());
+                etFechaIngreso.setText(pacienteid.getFechaIngreso());
+                etSintomas.setText(pacienteid.getSintomas());
+                tvTitulo.setText("Modificar paciente");
+
+
+
+            });
+
+        }
 
 
 
@@ -63,13 +88,41 @@ public class FormularioPacienteActivity extends AppCompatActivity {
 
             if(paciente.validar(this)){
                 executor.execute(() -> {
-                    db.pacienteDao().insert(paciente);
-                    System.out.println("Guardado correstamente");
 
-                    // Mostrar el Toast en el hilo principal
-                    mainHandler.post(() -> {
-                        Toast.makeText(this, "Paciente guardado correctamente", Toast.LENGTH_SHORT).show();
-                    });
+                    if(idPaciente != -1){
+
+                        paciente.setId(idPaciente); // Asegurar que el paciente tenga el ID correcto
+
+
+                        db.pacienteDao().update(paciente);
+                        System.out.println("Modificado correstamente");
+                        // Mostrar el Toast en el hilo principal
+                        mainHandler.post(() -> {
+                            Toast.makeText(this, "Paciente modificado correctamente", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(this, ListadoPacientesActivity.class);
+                            this.startActivity(intent);
+                        });
+
+
+                    }else{
+                        db.pacienteDao().insert(paciente);
+                        System.out.println("Guardado correstamente");
+
+                        // Mostrar el Toast en el hilo principal
+                        mainHandler.post(() -> {
+                            Toast.makeText(this, "Paciente guardado correctamente", Toast.LENGTH_SHORT).show();
+                        });
+                        etNombre.setText("");
+                        etApellido.setText("");
+                        etDNI.setText("");
+                        etFechaIngreso.setText("");
+                        etSintomas.setText("");
+
+
+
+                    }
+
+
                 });
             }
 

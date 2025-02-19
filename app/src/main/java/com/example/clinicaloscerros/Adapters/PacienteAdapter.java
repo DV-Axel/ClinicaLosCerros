@@ -106,5 +106,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         }
     }
 
+
+
 }
 
