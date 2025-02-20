@@ -4,8 +4,14 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import java.util.List;
+
 @Dao
 public interface UsuarioDao {
+    @Query("SELECT * FROM usuarios")
+    List<Usuario> getAllUsuarios();
+
 
     @Insert
     void insert(Usuario usuario);

@@ -1,10 +1,15 @@
 package com.example.clinicaloscerros.Classes;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity(tableName = "usuarios")
 public class Usuario {
@@ -122,7 +127,37 @@ public class Usuario {
                 '}';
     }
 
-    public void validar(Context context){
+    public boolean validar(Context context){
 
+        if(this.nombre.isEmpty() || this.apellido.isEmpty() || this.correo.isEmpty() || this.matricula.isEmpty() || this.especializacion.isEmpty() || this.contrasenia.isEmpty() || this.fechaNacimiento.isEmpty()){
+            Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+
+
+        //Validacion de nombre y apellido
+        if(!this.nombre.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$") || !this.apellido.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")){
+            Toast.makeText(context,"Verifique su nombre y apellido", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        //Validacion de fecha
+        //Usa try catch por que parse devuelve un booleano
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setLenient(false); //evita que se acepten fechas invalidas
+
+        try {
+            // Convertir la fecha de ingreso del paciente a un objeto Date
+            Date fechaIngresoDate = sdf.parse(this.fechaNacimiento);
+
+
+        } catch(ParseException e){
+            Toast.makeText(context, "Error en la fecha", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+
+        return true;
     }
 }
